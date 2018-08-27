@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="theme-color" content="#232654">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<link rel="icon" href="travel management.ico" type="image/x-icon" />
+	<link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+	<link rel="manifest" href="manifest.json">
+	<link rel='preload' href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' onload="this.onload=null;this.rel='stylesheet'" as="style" />
+	<link rel='stylesheet'  href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""  />
+	<link rel='stylesheet' href="css/styles.css" type="text/css" />
+	<noscript>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" >
+		<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css">
+	</noscript>
+
+	<title>Restaurant Info</title>
+</head>
+
+<body class="inside">
+	<!-- Beginning header -->
+	<header>
+		<!-- Beginning nav -->
+		<nav>
+			<h1><a href="/">Restaurant Reviews</a></h1>
+		</nav>
+		<!-- Beginning breadcrumb -->
+		<nav role="navigation" aria-label="Breadcrumb">
+			<ul id="breadcrumb">
+				<li><a href="/">Home</a></li>
+			</ul>
+		</nav>
+		<!-- End breadcrumb -->
+		<!-- End nav -->
+	</header>
+	<!-- End header -->
+	<!-- Beginning main -->
+	<main id="maincontent">
+		<!-- Beginning map -->
+		<section id="map-container">
+			<div id="map" aria-label="location" role="application"></div>
+		</section>
+		<!-- End map -->
+		<!-- Beginning restaurant -->
+		<section id="restaurant-container">
+			<h1 id="restaurant-name"></h1>
+			<img id="restaurant-img">
+			<div id="textArea">
+				<p id="restaurant-cuisine"></p>
+				<p id="restaurant-address"></p>
+			</div>
+			<table id="restaurant-hours"></table>
+		</section>
+		<!-- end restaurant -->
+		<!--Begining Sent Review-->
+		<section id="addReviewContainer">
+			<form id="addReview">
+				<h1> Add a review to this restaurant</h1><sup><sup> All Fields Required.</sup></sup>
+				<span class="ccc"> <label for="name1">Name</label>
+				Your Name
+				<input type="text" id="name1" placeholder="Please Provide Your Name" required aria-required="true" aria-multiline="false"/>
+				</span>
+				<span class="ccc"> <label for="textInput0">Rating</label>
+				Your Rating:
+				<input type="text" id="textInput5" value="5/5" readonly  disabled tab-index="-1"/>
+				<input type="range" min="1" value="5" max="5" step="1" id="textInput0" onchange="updateTextInput(this.value);" aria-label="rating range" aria-required="true" aria-valuemax="5" aria-valuemin="1" />
+				</span>
+				<span class="ccc"><label for="addHere"> Notes</label>
+				Your Review
+				<textarea id="addHere" placeholder="Your Review Goes Here. Be Nice!" required aria-required="true" aria-multiline="true"></textarea>
+				</span>
+				<button type="submit" id="submit" onclick="addReview()" aria-label="submit button">Submit Now</button>
+
+			</form>
+		</section>
+		<!-- Beginning reviews -->
+		<section id="reviews-container">
+			<ul id="reviews-list"></ul>
+		</section>
+
+		<!-- End reviews -->
+	</main>
+	<!-- End main -->
+	<!-- Beginning footer -->
+	<footer id="footer">
+		Copyright (c) 2017 <a href="/"> Restaurant Reviews </a> All Rights Reserved.
+	</footer>
+	<!-- End footer -->
+	<!-- Beginning scripts -->
+	<script>
+		function updateTextInput(val) {
+			document.getElementById('textInput5').value = val + "/" + "5";
+			document.getElementById("textInput0").setAttribute("aria-valuenow", val);
+		}
+
+	</script>
+	<!-- Database helpers -->
+	<script src="./idb.js"></script>
+	<script src="./js/dbhelper.js"></script>
+	<script src="./js/bundle2.js"></script>
+	<script src="./js/restaurant_info.js"></script>
+	<script src="register.js"></script>
+	<script src="sw.js"></script>
+	<!-- Main javascript file -->
+	<!-- Google Maps -->
+	<script defer src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+	<script defer src='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
+	<!-- End scripts -->
+</body>
+
+</html>
