@@ -4,7 +4,7 @@ import builtins from 'rollup-plugin-node-builtins';
 
 
 export default [{
-	input: './js/main.js',
+	input: './js/bundle.js',
 	plugins: [
     resolve({
 			jsnext: true,
@@ -17,7 +17,10 @@ export default [{
      ],
 	output: {
 		file: './js/bundle.js',
-		format: 'iife'
+		format: 'iife',
+		globals: {
+			DBHelper: 'DBHelper'
+		}
 	}
 }, {
 	input: './js/dbhelper.js',
