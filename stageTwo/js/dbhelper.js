@@ -1,5 +1,3 @@
-'use strict';
-
 let dbpromise;
 export default class DBHelper {
 	static get DATABASE_URL() {
@@ -86,7 +84,8 @@ export default class DBHelper {
 		return c.addTo(newMap), c
 	}
 	static updateFav(a, b) {
-		console.log('changing status to: ', b), fetch(`http://localhost:1337/restaurants/${a}/?is_favorite=${b}`, {
+		console.log('changing status to: ', b);var z = [a, b];if (!navigator.onLine) return void DBHelper.sendDataWhenOnline2(z);
+		fetch(`http://localhost:1337/restaurants/${a}/?is_favorite=${b}`, {
 			method: 'PUT',
 			mode: 'cors'
 		}).then(() => {
@@ -195,6 +194,17 @@ export default class DBHelper {
 			console.log(`Fetch successful!`)
 		}).catch(e => console.log('error:', e))
 	}
+	static sendDataWhenOnline2(w) {
+	localStorage.setItem('data', w);
+
+	window.addEventListener('online', (event) => {
+		let data = localStorage.getItem('data');
+
+		if (data !== null) {
+			DBHelper.updateFav(w[0], w[1]);
+		}
+	});
+}
 	static sendDataWhenOnline(a) {
 		console.log('Offline OBJ', a), localStorage.setItem('data', JSON.stringify(a.data)), console.log(`Local Storage: ${a.object_type} stored`), window.addEventListener('online', () => {
 			console.log('Browser: Online again!');
